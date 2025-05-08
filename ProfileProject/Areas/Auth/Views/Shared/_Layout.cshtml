@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/css/GlobalStyle.css" rel="stylesheet"/>
+    @RenderSection("Styles", required: false)
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        <header id="navbar">
+            <ul>
+                <li><p>Registration</p></li>
+                <li><a asp-controller="" asp-action="">Sign In</a></li>
+                <li><a asp-controller="Home" asp-action="CreateNewUser">Main page</a></li>
+            </ul>
+        </header>
+        
+        @RenderBody()
+
+        <footer>
+
+        </footer>
+    </div>
+</body>
+</html>
