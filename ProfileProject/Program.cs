@@ -28,6 +28,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IAuthControl, BasicAuthControl>();
+builder.Services.AddScoped<ProfileService>();
 
 var app = builder.Build();
 
@@ -38,6 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
+    app.UseStatusCodePagesWithReExecute("/Home/Error");
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
@@ -51,12 +53,12 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "areas",
+    name: "area",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+app.MapRazorPages();    
 
 app.Run();

@@ -1,16 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProfileProject.Data.Attributes;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
 namespace ProfileProject.Models
 {
-    public class ProfileViewModel
+    public class RegisterViewModel
     {
         [Required(ErrorMessage = "This field is required")]
-        [MaxLength(25, ErrorMessage = "Name is too long")]
-        public string Nickname { get; set; }
+        [StringLength(30, MinimumLength = 1, ErrorMessage = "Name must be between 1 and 30 characters")]
+        [LoginInDB]
+        public string Username { get; set; }
         
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Invalid email address")]
+        [EmailInDB]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
@@ -19,7 +22,7 @@ namespace ProfileProject.Models
 
         [Display(Name = "Repeat password")]
         [Required(ErrorMessage = "This field is required")]
-        [Compare(nameof(Password), ErrorMessage = "Must match password field")]
+        [Compare(nameof(Password), ErrorMessage = "Passwords dont match")]
         public string RepeatPassword { get; set; }
     }
 }

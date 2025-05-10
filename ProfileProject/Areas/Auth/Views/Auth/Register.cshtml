@@ -1,4 +1,4 @@
-﻿@model ProfileProject.Models.ProfileViewModel;
+﻿@model ProfileProject.Models.RegisterViewModel;
 
 @section Styles {
 	<link href="~/css/Auth.css" rel="stylesheet"/>
@@ -12,9 +12,9 @@
 
 <div id="reg-form">
 	<form method="post">
-		<label class="comic-relief-regular" asp-for="Nickname"></label><br />
-		<input asp-for="Nickname" /><br />
-		<span asp-validation-for="Nickname"></span>
+		<label class="comic-relief-regular" asp-for="Username"></label><br />
+		<input asp-for="Username" /><br />
+		<span asp-validation-for="Username"></span>
 		<br /><br />
 		<label class="comic-relief-regular" asp-for="Email"></label><br />
 		<input asp-for="Email" /><br />
