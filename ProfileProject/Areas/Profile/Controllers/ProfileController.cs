@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using ProfileProject.Data;
+using ProfileProject.Data.Attributes;
 using ProfileProject.Data.Services;
 using ProfileProject.Models;
 using System.Threading.Tasks;
@@ -11,16 +13,15 @@ namespace ProfileProject.Areas.Profile.Controllers
     [Route("profile/")]
     public class ProfileController : Controller
     {
-        private ApplicationDbContext _context;
         private BasicAuthControl _auth;
-        public ProfileController(ApplicationDbContext context, BasicAuthControl auth)
+        public ProfileController(BasicAuthControl auth)
         {
-            _context = context;
             _auth = auth;
         }
 
         [HttpGet]
         [Route("signin/")]
+        [OnlyAnonymous]
         public IActionResult SignIn()
         {
             return View();
@@ -28,6 +29,7 @@ namespace ProfileProject.Areas.Profile.Controllers
 
         [HttpPost]
         [Route("signin/")]
+        [OnlyAnonymous]
         public async Task<IActionResult> SignIn([FromForm] SignInViewModel input)
         {
             if (ModelState.IsValid)
@@ -45,6 +47,7 @@ namespace ProfileProject.Areas.Profile.Controllers
 
         [HttpGet]
         [Route("register/")]
+        [OnlyAnonymous]
         public IActionResult Register()
         {
             return View();
@@ -52,9 +55,10 @@ namespace ProfileProject.Areas.Profile.Controllers
 
         [HttpPost]
         [Route("register/")]
+        [OnlyAnonymous]
         public async Task<IActionResult> Register([FromForm] RegisterViewModel input)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 bool result = await _auth.AddNewUserWithCookies(input.Username, input.Email, input.Password);
                 if (result) { return RedirectToAction($"{input.Username}", "profile", new { area = "" }); }
@@ -74,6 +78,13 @@ namespace ProfileProject.Areas.Profile.Controllers
             ProfileViewModel? profile = await profileService.GetByUsername(username);
             if(profile != null) { return View(profile); }
             return NotFound();
+        }
+
+        [Route("logout/")]
+        public async Task<IActionResult> LogOut([FromServices] SignInManager<IdentityUser> signInManager)
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction($"signin", "profile", new { area = "" });
         }
     }
 }

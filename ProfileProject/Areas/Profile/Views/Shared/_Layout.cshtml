@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -18,8 +21,16 @@
             <li><a class="cal-sans-regular" asp-controller="" asp-action="">Search</a></li>
         </ul>
         <ul id="ul-tools">
-            <li><a class="cal-sans-regular" asp-controller="profile" asp-action="signin">Sign In</a></li>
-            <li><a class="cal-sans-regular" asp-controller="profile" asp-action="register">Register</a></li>
+            @if(signInManager.IsSignedIn(User))
+            {
+                <li><a class="cal-sans-regular" asp-controller="profile" asp-action="@User.Identity.Name">Welcome, @User.Identity.Name</a></li>
+                <li><a class="cal-sans-regular" asp-controller="profile" asp-action="logout">Log out</a></li>
+            }
+            else
+            {
+                <li><a class="cal-sans-regular" asp-controller="profile" asp-action="signin">Sign In</a></li>
+                <li><a class="cal-sans-regular" asp-controller="profile" asp-action="register">Register</a></li>
+            }
         </ul>
     </header>
     
