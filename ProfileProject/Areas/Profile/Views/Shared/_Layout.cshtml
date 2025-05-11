@@ -1,29 +1,35 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-
-    <link href="~/css/GlobalStyle.css" rel="stylesheet"/>
-    @RenderSection("Styles", required: false)
-
     <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/GlobalStyle.css" rel="stylesheet"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap" rel="stylesheet">
+
+    @RenderSection("Styles", required: false)
 </head>
 <body>
-    <div>
-        <header id="navbar">
-            <ul>
-                <li><p>Registration</p></li>
-                <li><a asp-controller="" asp-action="">Sign In</a></li>
-                <li><a asp-controller="Home" asp-action="CreateNewUser">Main page</a></li>
-            </ul>
-        </header>
-        
+    <header id="navbar">
+        <ul id="ul-pages">
+            <li><a class="cal-sans-regular" asp-controller="" asp-action="">Main Page</a></li>
+            <li><a class="cal-sans-regular" asp-controller="" asp-action="">Search</a></li>
+        </ul>
+        <ul id="ul-tools">
+            <li><a class="cal-sans-regular" asp-controller="profile" asp-action="signin">Sign In</a></li>
+            <li><a class="cal-sans-regular" asp-controller="profile" asp-action="register">Register</a></li>
+        </ul>
+    </header>
+    
+    <div id="content-container">
         @RenderBody()
-
-        <footer>
-
-        </footer>
     </div>
+
+    <footer id="copyright">
+        Copyright Artyom Re
+    </footer>
+
 </body>
 </html>

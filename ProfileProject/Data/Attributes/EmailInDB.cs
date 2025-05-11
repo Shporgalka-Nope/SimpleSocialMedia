@@ -6,15 +6,13 @@ namespace ProfileProject.Data.Attributes
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            ApplicationDbContext dbContext = validationContext.GetService<ApplicationDbContext>();
-            string? email = value.ToString().Trim();
-            var users = dbContext.Users.ToList();
-            var detectedUser = users.FirstOrDefault(u => u.Email == email);
+            string email = value.ToString().Trim();
 
-            if(detectedUser != null)
-            {
-                return new ValidationResult("This email is already taken!");
-            }
+            ApplicationDbContext dbContext = validationContext.GetService<ApplicationDbContext>();
+            var userList = dbContext.Users.ToList();
+            var detectedUser = userList.FirstOrDefault(u => u.Email == email);
+
+            if(detectedUser != null) { return new ValidationResult("This email is already taken!"); }
             return ValidationResult.Success;
         }
     }

@@ -1,0 +1,104 @@
+﻿h2 {
+    color: #F3C623;
+    margin: 19px 0px 5px 0px;
+}
+
+h3 {
+    color: #FFB22C;
+    margin: 10px 0px 2px 0px;
+}
+
+p {
+    margin: 5px 0 0 0;
+}
+
+span {
+    font-size: 14px;
+    color: #FA812F;
+}
+
+input[type="submit"] {
+    background-color: #FFB22C;
+    border: solid 2px #FA812F;
+    width: 50%;
+    height: 25px;
+}
+
+input[type="submit"]:hover {
+    background-color: #F3C623;
+}
+
+#form-container {
+
+    display: flex;
+    flex-direction: row;
+    flex-basis: auto;
+
+    background-color: white;
+    border-radius: 15px;
+}
+
+#form-fields {
+    display: flex;
+    flex-direction: column;
+    /*    X-axis and Y-axis*/
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    margin: 0px 15px 15px 15px;
+}
+
+#description {
+    margin: 0px 25px 0px 25px;
+}
+
+#connector {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /*    X-axis and Y-axis*/
+    justify-content: center;
+    align-items: center;
+}
+
+#background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+/*    z-index: -1;
+    flex-basis: auto;
+    flex-grow: 1;*/
+    
+    background-color: #F3C623;
+    opacity: 1;
+    background-image: linear-gradient(135deg, #383838 25%, transparent 25%), linear-gradient(225deg, #383838 25%, transparent 25%), linear-gradient(45deg, #383838 25%, transparent 25%), linear-gradient(315deg, #383838 25%, #F3C623 25%);
+    background-position: 40px 0, 40px 0, 0 0, 0 0;
+    background-size: 80px 80px;
+    background-repeat: repeat;
+}
+
+.ubuntu-light {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.ubuntu-regular {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.ubuntu-medium {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.ubuntu-bold {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}

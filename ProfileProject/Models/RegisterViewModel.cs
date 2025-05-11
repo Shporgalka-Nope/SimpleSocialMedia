@@ -18,10 +18,12 @@ namespace ProfileProject.Models
 
         [Required(ErrorMessage = "This field is required")]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Display(Name = "Repeat password")]
         [Required(ErrorMessage = "This field is required")]
+        [DataType(DataType.Password)]
         [Compare(nameof(Password), ErrorMessage = "Passwords dont match")]
         public string RepeatPassword { get; set; }
     }

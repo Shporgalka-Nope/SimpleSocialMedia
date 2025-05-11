@@ -18,11 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Services\Interfaces\" />
     <Folder Include="wwwroot\Media\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\PFPs\placeholder.png">
+    <Content Update="wwwroot\Profile\PFPs\placeholder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

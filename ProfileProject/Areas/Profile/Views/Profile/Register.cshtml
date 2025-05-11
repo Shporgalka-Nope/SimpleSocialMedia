@@ -1,0 +1,45 @@
+﻿@model ProfileProject.Models.RegisterViewModel;
+
+@section Styles {
+	<link href="~/css/RegisterStyle.css" rel="stylesheet"/>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+}
+
+<div id="background"></div>
+<div id="connector">
+	<div id="form-container"> 
+		<div id="form-fields">
+			<h2 class="cal-sans-regular">Register yourself!</h2>
+			<form method="post">
+				<label class="ubuntu-medium" asp-for="Username"></label><br />
+				<input asp-for="Username" /><br />
+				<span class="ubuntu-medium" asp-validation-for="Username"></span>
+				<br />
+				<label class="ubuntu-medium" asp-for="Email"></label><br />
+				<input asp-for="Email" /><br />
+				<span class="ubuntu-medium" asp-validation-for="Email"></span>
+				<br />
+				<label class="ubuntu-medium" asp-for="Password"></label><br />
+				<input asp-for="Password" /><br />
+			 	<span class="ubuntu-medium" asp-validation-for="Password"></span>
+				<br />
+				<label class="ubuntu-medium" asp-for="RepeatPassword"></label><br />
+				<input asp-for="RepeatPassword" /><br />
+				<span class="ubuntu-medium" asp-validation-for="RepeatPassword"></span><br />
+
+				<input class="ubuntu-medium" type="submit" value="Done!" />
+			</form>
+		</div>
+		<div id="description">
+			<h2 class="cal-sans-regular">Why?</h2>
+			<h3 class="cal-sans-regular">Benefits</h3>
+			<p class="ubuntu-regular">
+				Making an account allows you to create your own profile,<br /> leave posts and comments.<br /><br />
+				It also allows you to recieve our special invitations,<br /> benefits and more!
+			</p>
+		</div>
+	</div> 
+</div>

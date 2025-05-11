@@ -1,38 +1,122 @@
-﻿body {
-    margin: 0;
-    top: 0;
-}
-
-ul {
-    margin: 0;
-}
-
-body > div {
+﻿/*Inheritance*/
+#connector {
+    position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
+    /*    X-axis and Y-axis*/
     justify-content: center;
     align-items: center;
+}
+
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+
+/*    height: 2000px;*/
 }
 
 #navbar {
-    position: absolute;
-    top: 0;
-
+    height: 70px;
     width: 100%;
-    z-index: 5;
+    position: sticky;
+    top: 0;
+    display: flex;
+    /*    X-axis*/
+    justify-content: space-between;
+    /*    Y-axis*/
+    align-items: center;
+    background-color: #F3C623;
+    border-bottom: solid #383838 3px;
+    z-index: 9999;
 
-    box-shadow: 0px 10px 45px black;
-    background-color: white;
+    box-shadow: 0px 0px 15px black;
 }
 
 #navbar > ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 20px;
-
     list-style-type: none;
-    height: 50px
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    gap: 5px;
+}
+
+#navbar > ul > li {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+#navbar > ul > li a {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+    padding: 10px 15px;
+
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#navbar > ul > li:hover {
+    background-color: #FEF3E2;
+}
+
+#ul-pages {
+    display: flex;
+    flex-direction: row;
+    /*    X-axis*/
+    justify-content: center;
+    /*    Y-axis*/
+    align-items: center;
+    align-self: flex-start;
+}
+
+#ul-tools {
+    display: flex;
+    flex-direction: row;
+    /*    X-axis*/
+    justify-content: center;
+    /*    Y-axis*/
+    align-items: center;
+    align-self: flex-end;
+}
+
+#copyright {
+    position: relative;
+    bottom: 0px;
+
+    display: flex;
+    /*    X-axis*/
+    justify-content: center;
+    /*    Y-axis*/
+    align-items: center;
+    flex-shrink: 0;
+
+    height: 50px;
+    width: 100%;
+    background-color: aliceblue;
+}
+
+#content-container {
+    display: flex;
+    position: relative;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+
+    overflow: hidden;
+}
+
+.cal-sans-regular {
+    font-family: "Cal Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }

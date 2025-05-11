@@ -72,14 +72,5 @@ public class ProfileService_Tests
             context.UserClaims.AddRange(claimsList);
         }
 
-            var moqStore = new Mock<IUserStore<IdentityUser>>();
-        var moqUserManager = new Mock<UserManager<IdentityUser>>(moqStore.Object, null, null, null, null, null, null, null, null);
-        moqUserManager.Setup(x => x.CreateAsync(It.IsAny<IdentityUser>(), It.IsAny<string>()))
-            .ReturnsAsync(IdentityResult.Success);
-        moqUserManager.Setup(x => x.AddClaimsAsync(It.IsAny<IdentityUser>(),
-            It.IsAny<IEnumerable<System.Security.Claims.Claim>>()))
-            .ReturnsAsync(IdentityResult.Success);
-
-        var service = new ProfileService(moqUserManager.Object);
     }
 }

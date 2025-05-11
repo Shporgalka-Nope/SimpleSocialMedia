@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProfileProject.Data;
 using ProfileProject.Data.Services;
-using ProfileProject.Data.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,11 +22,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
     options.Password.RequiredUniqueChars = 0;
+    options.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IAuthControl, BasicAuthControl>();
+builder.Services.AddScoped<BasicAuthControl>();
 builder.Services.AddScoped<ProfileService>();
 
 var app = builder.Build();
@@ -52,9 +52,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "area",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "area",
+//    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

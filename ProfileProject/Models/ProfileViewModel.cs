@@ -1,4 +1,6 @@
-﻿namespace ProfileProject.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace ProfileProject.Models
 {
     public class ProfileViewModel
     {

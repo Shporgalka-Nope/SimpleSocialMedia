@@ -1,3 +1,36 @@
 ﻿@model ProfileProject.Models.ProfileViewModel;
 
-<p>@Model.Username</p>
+@section Styles {
+<link href="~/css/ProfileStyle.css" rel="stylesheet"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+}
+
+<div id="background"></div>
+
+<div id="connector">
+	<div id="profile-container">
+		<div id="head">
+			<div id="margin">	
+				<img src="@Model.PFPath" />
+				<div id="name-and-shit">
+					<p id="username" class="comic-relief-bold">@Model.Username</p>
+
+					@if(Model.Age > 16)
+					{
+						<p id="age" class="comic-relief-regular">@Model.Age years old</p>
+					}
+
+					<p id="date" class="comic-relief-regular">Here since: @Model.CreationDate</p>
+
+					<p id="bio" class="comic-relief-regular">@Model.Bio</p>
+				</div>
+			</div>
+		</div>
+		<div id="posts">
+
+		</div>
+	</div>
+</div>

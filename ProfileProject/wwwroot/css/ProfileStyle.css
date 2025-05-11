@@ -1,0 +1,110 @@
+﻿#background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+/*    flex-basis: auto;
+    flex-grow: 1;*/
+
+    background-color: #F3C623;
+    opacity: 1;
+    background: radial-gradient(circle, transparent 20%, #F3C623 20%, #F3C623 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #F3C623 20%, #F3C623 80%, transparent 80%, transparent) 100px 100px, linear-gradient(#383838 8px, transparent 8px) 0 -4px, linear-gradient(90deg, #383838 8px, #F3C623 8px) -4px 0;
+    background-size: 200px 200px, 200px 200px, 100px 100px, 100px 100px;
+}
+
+#profile-container {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    flex: 1;
+    flex-basis: 100%;
+
+    top: 45px;
+    z-index: 1;
+    background-color: white;
+    border-radius: 15px;
+}
+
+#head > div {
+    display: flex;
+    flex-direction: row;
+    margin: 25px 25px 0px 25px;
+}
+
+#head {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 250px;
+}
+
+#head > div > img {
+    box-sizing: border-box;
+    height: 100%;
+    width: auto;
+    border: solid #FFB22C 4px;
+}
+
+#name-and-shit {
+    display: flex;
+    flex-direction: column;
+    /*    X-axis and Y-axis*/
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    height: 100%;
+    width: 100%;
+
+    margin: 0px 0px 0px 25px;
+    overflow: hidden;
+}
+
+#username {
+    font-size: 32px;
+    margin: 0;
+    color: black;
+}
+
+#age {
+    font-size: 24px;
+    margin: 0;
+}
+
+#date {
+    font-size: 24px;
+    margin: 0;
+}
+
+#bio {
+    font-size: 18px;
+    margin: 5px 0px 0px 0px;
+    flex: 1;
+    word-break: break-all;
+    border-top: solid #FFB22C 2px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Ограничивает 3 строками */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#posts {
+    height: 5000px;
+    flex-grow: 1;
+}
+
+.comic-relief-regular {
+    font-family: "Comic Relief", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.comic-relief-bold {
+    font-family: "Comic Relief", system-ui;
+    font-weight: 700;
+    font-style: normal;
+}

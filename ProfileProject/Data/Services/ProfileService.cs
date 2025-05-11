@@ -13,30 +13,27 @@ namespace ProfileProject.Data.Services
             _userManager = userManager;
         }
 
-        public async Task<ProfileViewModel> GetByUsername(string username)
+        public async Task<ProfileViewModel> FromIdentity(IdentityUser identity)
         {
-            var selectedUser = await _userManager.FindByNameAsync(username);
+            var claims = await _userManager.GetClaimsAsync(identity);
+            ProfileViewModel profile = new ProfileViewModel()
+            {
+                Username = identity.UserName,
+                Age = int.Parse(claims.FirstOrDefault(x => x.Type == "Age").Value),
+                CreationDate = DateOnly.FromDateTime(
+                    DateTime.Parse(claims.FirstOrDefault(x => x.Type == "CreationDate").Value)),
+                Bio = claims.FirstOrDefault(x => x.Type == "Bio").Value,
+                PFPath = claims.FirstOrDefault(x => x.Type == "PFPath").Value
+            };
+            return profile;
+        }
+
+        public async Task<ProfileViewModel?> GetByUsername(string username)
+        {
+            IdentityUser selectedUser = await _userManager.FindByNameAsync(username);
             if(selectedUser != null)
             {
-                var Claims = await _userManager.GetClaimsAsync(selectedUser);
-                ProfileViewModel profile = new ProfileViewModel()
-                {
-                    Username = selectedUser.UserName,
-                    Bio = Claims?.FirstOrDefault(c => c.Type == "Bio").Value,
-                    Age = int.Parse(Claims?.FirstOrDefault(c => c.Type == "Age").Value),
-                    CreationDate = DateOnly.FromDateTime(
-                        DateTime.Parse(Claims.FirstOrDefault(c => c.Type == "CreationDate").Value)),
-                    PFPath = Claims.FirstOrDefault(c => c.Type == "PFPath").Value
-                };
-
-                //ProfileViewModel profile = new ProfileViewModel();
-                //profile.Username = selectedUser.UserName;
-                //profile.Bio = Claims?.FirstOrDefault(c => c.Type == "Bio").Value;
-                //profile.Age = int.Parse(Claims?.FirstOrDefault(c => c.Type == "Age").Value);
-                //profile.CreationDate = DateOnly.FromDateTime(
-                //    DateTime.Parse(Claims.FirstOrDefault(c => c.Type == "CreationDate").Value));
-                //profile.PFPath = Claims.FirstOrDefault(c => c.Type == "PFPath").Value;
-
+                ProfileViewModel profile = await FromIdentity(selectedUser);
                 return profile;
             }
             return null;
