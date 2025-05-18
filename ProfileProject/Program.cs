@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProfileProject.Data;
+using ProfileProject.Data.Requirements;
 using ProfileProject.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,8 +29,19 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/profile/register/";
+});
+
+builder.Services.AddAuthorization(options =>
+    options.AddPolicy("IsAllowedToEdit", policy =>
+    policy.Requirements.Add(new ProfileOwnerRequirement())));
+
 builder.Services.AddScoped<BasicAuthControl>();
 builder.Services.AddScoped<ProfileService>();
+
+builder.Services.AddScoped<IAuthorizationHandler, ProfileOwnerAuthorizationHandler>();
 
 var app = builder.Build();
 
@@ -58,7 +71,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{username?}");
 app.MapRazorPages();    
 
 app.Run();

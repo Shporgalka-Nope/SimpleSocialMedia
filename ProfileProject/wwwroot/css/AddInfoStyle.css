@@ -1,0 +1,7 @@
+﻿#form-fields {
+    flex-basis: auto;
+}
+
+#form-fields > form {
+    flex-basis: auto;
+}

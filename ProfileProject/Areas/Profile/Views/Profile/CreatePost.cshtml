@@ -1,0 +1,25 @@
+﻿@model ProfileProject.Models.PostModel;
+
+@section Styles 
+{
+	<link href="~/css/RegisterStyle.css" rel="stylesheet" />
+	<link href="~/css/CreatePostStyle.css" rel="stylesheet"/>
+}
+
+<div id="background"></div>
+
+<div id="connector">
+	<div id="form-container">
+		<h2 class="cal-sans-regular">Create new post</h2>
+		<form method="post">
+			<label class="ubuntu-medium" asp-for="Title"></label>
+			<input type="text" asp-for="Title"/>
+			<span asp-validation-for="Title"></span>
+			<br />
+			<label class="ubuntu-medium" asp-for="Text"></label>
+			<input id="form-input-text" type="text" asp-for="Text" />
+			<br />
+			<input class="ubuntu-medium" type="submit" />
+		</form>
+	</div>
+</div>

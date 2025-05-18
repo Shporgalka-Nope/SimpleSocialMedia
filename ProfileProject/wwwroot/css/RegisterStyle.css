@@ -1,4 +1,9 @@
-﻿h2 {
+﻿/*inheritance*/
+#bio-data {
+    width: 100%;
+}
+
+h2 {
     color: #F3C623;
     margin: 19px 0px 5px 0px;
 }
@@ -29,37 +34,27 @@ input[type="submit"]:hover {
 }
 
 #form-container {
-
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-basis: auto;
 
-    background-color: white;
+    background-color: white;    
     border-radius: 15px;
 }
 
 #form-fields {
+    position: relative;
     display: flex;
     flex-direction: column;
     /*    X-axis and Y-axis*/
     justify-content: flex-start;
     align-items: flex-start;
-
     margin: 0px 15px 15px 15px;
 }
 
 #description {
     margin: 0px 25px 0px 25px;
-}
-
-#connector {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    /*    X-axis and Y-axis*/
-    justify-content: center;
-    align-items: center;
 }
 
 #background {

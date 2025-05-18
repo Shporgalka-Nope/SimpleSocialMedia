@@ -8,25 +8,23 @@
 	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 }
 
-<div id="background"></div>
-<div id="connector">
-	<div id="form-container">
-		<div id="form-fields">
-			<h2 class="cal-sans-regular">Sign in</h2>
-			<form method="post">
-				<label class="ubuntu-medium" asp-for="Email"></label><br />
-				<input asp-for="Email" /><br />
-				<span class="ubuntu-medium" asp-validation-for="Email"></span>
-				<br />
-				<label class="ubuntu-medium" asp-for="Password"></label><br />
-				<input asp-for="Password" /><br />
-				<span class="ubuntu-medium" asp-validation-for="Password"></span>
-				<br />
-				<label class="ubuntu-medium" asp-for="RememberMe"></label><br />
-				<input asp-for="RememberMe" /><br />
 
-				<input class="ubuntu-medium" type="submit" value="Done!" />
-			</form>
-		</div>
+<div id="form-container">
+	<div id="form-fields">
+		<h2 class="cal-sans-regular">Sign in</h2>
+		<form method="post">
+			<label class="ubuntu-medium" asp-for="Email"></label><br />
+			<input asp-for="Email" /><br />
+			<span class="ubuntu-medium" asp-validation-for="Email"></span>
+			<br />
+			<label class="ubuntu-medium" asp-for="Password"></label><br />
+			<input asp-for="Password" /><br />
+			<span class="ubuntu-medium" asp-validation-for="Password"></span>
+			<br />
+			<label class="ubuntu-medium" asp-for="RememberMe"></label><br />
+			<input asp-for="RememberMe" /><br />
+
+			<input class="ubuntu-medium" type="submit" value="Done!" />
+		</form>
 	</div>
 </div>

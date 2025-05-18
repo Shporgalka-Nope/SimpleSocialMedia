@@ -1,0 +1,38 @@
+﻿@model ProfileProject.Models.RegisterAddInfoViewModel;
+
+@section Styles {
+	<link href="~/css/RegisterStyle.css" rel="stylesheet" />
+	<link href="~/css/AddInfoStyle.css" rel="stylesheet" />
+}
+
+<div id="form-container">
+	<div id="form-fields">
+		<h2 class="cal-sans-regular">Add more info!</h2>
+		<form method="post" enctype="multipart/form-data">
+			<label class="ubuntu-medium" asp-for="PFPath"></label><br />
+			<input asp-for="PFPath" /><br />
+			<span class="ubuntu-medium" asp-validation-for="PFPath"></span>
+			<br />
+			<label class="ubuntu-medium" asp-for="Age"></label><br />
+			<input type="number" asp-for="Age" /><br />
+			<span class="ubuntu-medium" asp-validation-for="Age"></span>
+			<br />
+			<label class="ubuntu-medium" asp-for="Bio"></label><br />
+			<input id="bio-data" asp-for="Bio" /><br />
+			<span class="ubuntu-medium" asp-validation-for="Bio"></span>
+			<br />
+			<input class="ubuntu-medium" type="submit" value="Done!" />
+		</form>
+	</div>
+	<div id="description">
+		<h2 class="cal-sans-regular">Whats the point?</h2>
+		<h3 class="cal-sans-regular">More friends!</h3>
+		<p class="ubuntu-regular">
+			The more information you add, the better the chances<br /> to find a better person to talk to.<br />
+		</p>
+		<h3 class="cal-sans-regular">Individuality!</h3>
+		<p class="ubuntu-regular">
+			Make yourself look unique, by additing a profile picture<br /> and writing an interesting bio!
+		</p>
+	</div>
+</div> 

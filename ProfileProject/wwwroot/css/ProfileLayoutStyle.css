@@ -1,15 +1,26 @@
-﻿/*Inheritance*/
-#connector {
+﻿#background {
     position: absolute;
     width: 100%;
     height: 100%;
+    z-index: -1;
+    background-color: #F3C623;
+    opacity: 1;
+    background: radial-gradient(circle, transparent 20%, #F3C623 20%, #F3C623 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #F3C623 20%, #F3C623 80%, transparent 80%, transparent) 100px 100px, linear-gradient(#383838 8px, transparent 8px) 0 -4px, linear-gradient(90deg, #383838 8px, #F3C623 8px) -4px 0;
+    background-size: 200px 200px, 200px 200px, 100px 100px, 100px 100px;
+}
+
+/*Inheritance*/
+#connector {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    height: auto;
     display: flex;
     /*    X-axis and Y-axis*/
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
-
-
 
 body {
     display: flex;
@@ -17,7 +28,7 @@ body {
     margin: 0;
     min-height: 100vh;
     width: 100%;
-
+    height: auto;
 /*    height: 2000px;*/
 }
 
@@ -89,9 +100,8 @@ body {
 }
 
 #copyright {
-    position: relative;
-    bottom: 0px;
-
+    margin: 10px 0px 0px 0px;
+    z-index: 10;
     display: flex;
     /*    X-axis*/
     justify-content: center;
@@ -107,12 +117,9 @@ body {
 #content-container {
     display: flex;
     position: relative;
-
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: auto;
-
-    overflow: hidden;
+    flex-direction: column;
+    min-height: calc(100vh - 73px);
+    height: auto;
 }
 
 .cal-sans-regular {

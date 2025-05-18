@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using ProfileProject.Data;
@@ -6,6 +7,7 @@ using ProfileProject.Data.Attributes;
 using ProfileProject.Data.Services;
 using ProfileProject.Models;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ProfileProject.Areas.Profile.Controllers
 {
@@ -26,7 +28,6 @@ namespace ProfileProject.Areas.Profile.Controllers
         {
             return View();
         }
-
         [HttpPost]
         [Route("signin/")]
         [OnlyAnonymous]
@@ -35,7 +36,7 @@ namespace ProfileProject.Areas.Profile.Controllers
             if (ModelState.IsValid)
             {
                 var model = await _auth.SignInUser(input.Email, input.Password, input.RememberMe);
-                if(model == null)
+                if (model == null)
                 {
                     ModelState.AddModelError(nameof(input.Password), "Wrong email or password");
                     return View(input);
@@ -52,7 +53,6 @@ namespace ProfileProject.Areas.Profile.Controllers
         {
             return View();
         }
-
         [HttpPost]
         [Route("register/")]
         [OnlyAnonymous]
@@ -61,10 +61,10 @@ namespace ProfileProject.Areas.Profile.Controllers
             if (ModelState.IsValid)
             {
                 bool result = await _auth.AddNewUserWithCookies(input.Username, input.Email, input.Password);
-                if (result) { return RedirectToAction($"{input.Username}", "profile", new { area = "" }); }
+                if (result) { return RedirectToAction($"info", "profile"); }
                 else
                 {
-                    ModelState.AddModelError(nameof(RegisterViewModel.RepeatPassword), 
+                    ModelState.AddModelError(nameof(RegisterViewModel.RepeatPassword),
                         "Something went wrong during account creation");
                     return View(input);
                 }
@@ -72,11 +72,64 @@ namespace ProfileProject.Areas.Profile.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("info/")]
+        [Authorize]
+        public IActionResult RegisterAddInfo()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Route("info/")]
+        [Authorize]
+        public async Task<IActionResult> RegisterAddInfo([FromForm] RegisterAddInfoViewModel input)
+        {
+            if (ModelState.IsValid)
+            {
+                await _auth.AddAdditionalInfo(input.Bio, input.Age, input.PFPath);
+                return RedirectToAction($"{User.Identity.Name}", "profile");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        [Route("edit/{username:required}")]
+        [Authorize]
+        public async Task<IActionResult> Edit([FromRoute] string username, [FromServices] ProfileService profileService)
+        {
+            AuthorizationResult result = await _auth.ProveUserOwnership(User, username);
+            if(result == null || !result.Succeeded) { return Forbid(); }
+            
+            ProfileViewModel profileVM = await profileService.GetByUsername(username);
+            EditViewModel editVM = await profileService.EditViewModelFromProfile(profileVM);
+            editVM.IsAllowedToEdit = true;
+            return View(editVM);
+        }
+        [HttpPost]
+        [Route("edit/{username:required}")]
+        [Authorize]
+        public async Task<IActionResult> Edit(string username, [FromForm] EditViewModel input)
+        {
+            if(!ModelState.IsValid) { return View(); }
+
+            AuthorizationResult result = await _auth.ProveUserOwnership(User, username);
+            if (result == null || !result.Succeeded) { return Forbid(); }
+
+            await _auth.AddAdditionalInfo(input.Bio, input.Age, input.NewPFP, input.ShowAge, input.ShowInSearch);
+
+            return RedirectToAction($"{User.Identity.Name}", "profile");
+        }
+
         [Route("{username:required}")]
         public async Task<IActionResult> GetByUsername(string username, [FromServices] ProfileService profileService)
         {
             ProfileViewModel? profile = await profileService.GetByUsername(username);
-            if(profile != null) { return View(profile); }
+            if(profile != null) 
+            {
+                AuthorizationResult result = await _auth.ProveUserOwnership(User, username);
+                if(result.Succeeded) { profile.IsAllowedToEdit = true; }
+                return View(profile); 
+            }
             return NotFound();
         }
 

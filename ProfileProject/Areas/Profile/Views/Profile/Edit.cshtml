@@ -1,0 +1,74 @@
+﻿@model ProfileProject.Models.EditViewModel;
+
+@section Styles {
+	<link href="~/css/EditStyle.css" rel="stylesheet" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+}
+
+<div id="settings-container">
+	<form method="post">
+		<h1 class="ubuntu-bold">Settings</h1>
+		<div id="visibility-div">
+			<h2 class="ubuntu-medium">Visibility</h2>
+			<div id="search-check">
+				<div>
+					<h3 class="ubuntu-medium">Appear in search</h3>
+					<p class="ubuntu-regular">If unchecked, you wont appear in results of search page</p>
+				</div>
+				<input type="checkbox" asp-for="ShowInSearch" />
+			</div>
+
+			<div id="age-check">
+				<div>
+					<h3 class="ubuntu-medium">Show age</h3>
+					<p class="ubuntu-regular">If unchecked, your age wont be visible in your profile
+						<br />Note that if you are younger than 16 your age wont appear anyway</p>
+				</div>
+				<input type="checkbox" asp-for="ShowAge" />
+			</div>
+		</div>
+
+		<div id="profile-info-div">
+			<h2 class="ubuntu-medium">Profile info</h2>
+			<div id="pfp">
+				<div>
+					<h3 class="ubuntu-medium">Set new profile picture</h3>
+					<p class="ubuntu-regular">Please note that max file size is 10 MB</p>
+				</div>
+				<div id="input-file">
+					<input type="file" asp-for="NewPFP" />
+				</div>
+			</div>
+
+			<div id="bio">
+				<div>
+					<h3 class="ubuntu-medium">Bio</h3>
+					<p class="ubuntu-regular">Please note, that any TOS violations will result in ban <br />Max 400 characters</p>
+				</div>
+				<textarea maxlength="400" asp-for="Bio"></textarea>
+			</div>
+
+			<div id="age">
+				<div>
+					<h3 class="ubuntu-medium">Age</h3>
+					<p class="ubuntu-regular"></p>
+				</div>
+				<input type="number" asp-for="Age" />
+			</div>
+		</div>
+
+		<div id="profile-info-div">
+			<h2 class="ubuntu-medium">Save changes</h2>
+			<div id="save">
+				<input type="submit" />
+				
+				<div id="cancel">
+					<a asp-controller="profile" asp-action="@User.Identity.Name">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

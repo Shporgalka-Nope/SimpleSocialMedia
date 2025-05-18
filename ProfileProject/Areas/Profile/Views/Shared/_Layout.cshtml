@@ -6,7 +6,7 @@
 <head>
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/css/GlobalStyle.css" rel="stylesheet"/>
+    <link href="~/css/ProfileLayoutStyle.css" rel="stylesheet"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,12 +35,17 @@
     </header>
     
     <div id="content-container">
-        @RenderBody()
+        <div id="background"></div>
+
+        <div id="connector">
+            @RenderBody()
+        
+        </div>
+        <footer id="copyright">
+            Copyright Artyom Re
+        </footer>
     </div>
 
-    <footer id="copyright">
-        Copyright Artyom Re
-    </footer>
 
 </body>
 </html>
