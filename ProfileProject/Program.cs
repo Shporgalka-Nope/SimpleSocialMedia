@@ -35,13 +35,19 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddAuthorization(options =>
+{
     options.AddPolicy("IsAllowedToEdit", policy =>
-    policy.Requirements.Add(new ProfileOwnerRequirement())));
+    policy.Requirements.Add(new ProfileOwnerRequirement()));
+    options.AddPolicy("IsPostOwner", polity =>
+    polity.Requirements.Add(new PostOwnerRequirement()));
+});
 
 builder.Services.AddScoped<BasicAuthControl>();
 builder.Services.AddScoped<ProfileService>();
+builder.Services.AddScoped<PostService>();
 
 builder.Services.AddScoped<IAuthorizationHandler, ProfileOwnerAuthorizationHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, PostOwnerAuthorizationHandler>();
 
 var app = builder.Build();
 

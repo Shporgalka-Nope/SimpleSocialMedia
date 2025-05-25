@@ -7,8 +7,9 @@ namespace ProfileProject.Models
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "This field is required")]
-        [StringLength(30, MinimumLength = 1, ErrorMessage = "Name must be between 1 and 30 characters")]
+        [StringLength(15, MinimumLength = 1, ErrorMessage = "Name must be between 1 and 15 characters")]
         [LoginInDB]
+        [NoChars]
         public string Username { get; set; }
         
         [Required(ErrorMessage = "This field is required")]
@@ -19,6 +20,7 @@ namespace ProfileProject.Models
         [Required(ErrorMessage = "This field is required")]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long")]
         [DataType(DataType.Password)]
+        [NoChars]
         public string Password { get; set; }
 
         [Display(Name = "Repeat password")]

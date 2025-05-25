@@ -1,0 +1,107 @@
+﻿#box {
+    position: relative;
+    width: 90%;
+    height: auto;
+    top: 25px;
+
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 15px;
+
+    padding: 15px 15px 25px 15px;
+
+    background-color: white;
+    border-radius: 15px;
+}
+
+#create-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0px;
+    padding-bottom: 15px;
+    border-bottom: solid 4px #FFB22C;
+}
+
+#create {
+    border-bottom: dotted 5px #948979;
+    flex-grow: 1;
+    padding-bottom: 15px;
+}
+
+#create-head > p {
+    margin: 0;
+}
+
+#create-head > h1 {
+    margin: 0;
+}
+
+form > label {
+    font-size: 28px;
+}
+
+#input-title {
+    font-size: 18px;
+    width: 100%;
+}
+
+#input-text {
+    width: 100%;
+    height: 250px;
+    font-size: 18px;
+    resize: none;
+    flex-grow: 1;
+    flex: 1;
+}
+
+#save {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+#save > div {
+    width: 92px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: #FA812F 4px solid;
+    border-radius: 15px;
+}
+
+#save > div > a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+#save > div:hover {
+    background-color: #FEF3E2;
+}
+
+#save > div:active {
+    background-color: #FFB22C;
+}
+
+#save > input {
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    border: #FA812F 4px solid;
+    border-radius: 15px;
+}
+
+#save > input:hover {
+    background-color: #FEF3E2;
+}
+
+#save > input:active {
+    background-color: #FFB22C;
+}

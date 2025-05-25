@@ -6,17 +6,17 @@
 
 @section Styles 
 {
-<link href="~/css/ProfileStyle.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="~/css/ProfileStyle.css" rel="stylesheet"/>
+	<script defer src="~/js/GetByUsername.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
 
 
 }
-
 
 <div id="profile-container">
 	<div id="head">
@@ -44,17 +44,22 @@
 		</div>
 	</div>
 	<div id="posts">
-		<div id="profile-nav">
-			<div id="posts-control">
-				<a asp-controller="profile" asp-action="posts/create"><span class="material-icons">add</span></a>
-				<a><span class="material-icons">refresh</span></a>
-			</div>
-			@if(Model.IsAllowedToEdit == true)
-			{
+		@if(Model.IsAllowedToEdit == true)
+		{
+			<div id="profile-nav">
+				<div id="posts-control">
+					<a asp-controller="posts" asp-action="create"><span class="material-icons">add</span></a>
+					<a><span class="material-icons">refresh</span></a>
+				</div>
 				<div id="account-control">
 					<a asp-controller="profile" asp-action="edit" asp-route-username="@Model.Username"><span class="material-icons">settings</span></a>
 				</div>
-			}
+			</div>
+		}
+	
+		<div id="posts-list">
+
 		</div>
+		<div id="refresh" class="ubuntu-bold gray">Thats all!</div>
 	</div>
 </div>

@@ -122,8 +122,49 @@ body {
     height: auto;
 }
 
+/*Fonts*/
 .cal-sans-regular {
     font-family: "Cal Sans", sans-serif;
     font-weight: 400;
     font-style: normal;
+}
+
+.ubuntu-light {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.ubuntu-regular {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.ubuntu-medium {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.ubuntu-bold {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.gold {
+    color: #F3C623
+}
+
+.orange {
+    color: #FFB22C;
+}
+
+.red {
+    color: #FA812F;
+}
+
+.gray {
+    color: #948979; 
 }

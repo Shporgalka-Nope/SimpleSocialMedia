@@ -1,0 +1,38 @@
+﻿@model List<ProfileProject.Models.PostModel>;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<IdentityUser> userManager;
+@{
+	if(Model.Count >= 1)
+	{
+		if(User.Identity.IsAuthenticated && (await userManager.FindByNameAsync(User.Identity.Name)) == Model.First().Author)
+		{
+			ViewBag.isOwner = true;
+		}
+	}
+}
+
+@foreach(var post in Model)
+{
+	<div class="post-card">
+		<div class="info-container">
+			<div class="info ubuntu-medium">
+				<p>Author: @post.Author</p>
+				<p>Created: @post.CreationDateTime</p>
+			</div>
+			@if (ViewBag.isOwner == true)
+			{
+				<div class="post-controls">
+					<a asp-controller="api" asp-action="deletepost" asp-route-postid="@post.Id"><span class="material-icons">delete</span></a>
+				</div>
+			}
+		</div>
+
+		<div class="post-title ubuntu-regular">
+			<p>@post.Title</p>
+		</div>
+
+		<div class="post-text ubuntu-light">
+			<p>@post.Text</p>
+		</div>
+	</div>
+}

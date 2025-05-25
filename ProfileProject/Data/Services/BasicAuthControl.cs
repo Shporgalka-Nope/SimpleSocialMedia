@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using ProfileProject.Data.Requirements;
 using ProfileProject.Models;
@@ -17,11 +18,12 @@ namespace ProfileProject.Data.Services
         private IConfiguration _config;
         private ProfileService _profileservice;
         private IAuthorizationService _authService;
+        private PostService _postService;
         public BasicAuthControl(
             [FromServices] UserManager<IdentityUser> userManager,
             [FromServices] SignInManager<IdentityUser> signInManager,
-            [FromServices] ILogger<BasicAuthControl> logger,
             [FromServices] ProfileService profileservice,
+            [FromServices] PostService postService,
             [FromServices] IConfiguration config,
             [FromServices] IAuthorizationService authService)
         {
@@ -30,6 +32,7 @@ namespace ProfileProject.Data.Services
             _config = config;
             _profileservice = profileservice;
             _authService = authService;
+            _postService = postService;
         }
 
         public async Task<bool> AddNewUserWithCookies(string username, string email, string password)
@@ -148,6 +151,16 @@ namespace ProfileProject.Data.Services
             {
                 var profile = await _profileservice.FromIdentity(profileUser);
                 return await _authService.AuthorizeAsync(loggedUser, profile, "IsAllowedToEdit");
+            }
+            return null;
+        }
+
+        public async Task<AuthorizationResult> ProvePostOwnership(ClaimsPrincipal loggedUser, string postId)
+        {
+            PostModel? post = _postService.GetById(postId);
+            if (post != null)
+            {
+                return await _authService.AuthorizeAsync(loggedUser, post, "IsPostOwner");
             }
             return null;
         }

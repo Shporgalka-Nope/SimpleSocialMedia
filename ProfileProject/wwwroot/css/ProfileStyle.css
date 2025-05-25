@@ -11,6 +11,7 @@
     z-index: 1;
     background-color: white;
     border-radius: 15px;
+    padding-bottom: 50px;
 }
 
 #head > div {
@@ -80,10 +81,11 @@
 #posts {
     height: auto;
     flex-grow: 1;
+    margin: 15px 15px 0px 15px;
 }
 
 #profile-nav {
-    margin: 15px 15px 0px 15px;
+/*    margin: 15px 15px 0px 15px;*/
     padding: 10px;
 
     display: flex;
@@ -121,6 +123,85 @@
 
 #profile-nav > div > a:active {
     background-color: #FA812F;
+}
+
+#refresh {
+    margin-top: 15px;
+    width: 100%;
+    height: 30px;
+    border: solid 2px #393E46;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+#posts-list {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    gap: 5px;
+    border-left: dashed 4px #393E46;
+    border-right: dashed 4px #393E46;
+}
+
+.post-card {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    border: solid 2px #FA812F;
+    width: 90%;
+    height: auto;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: dotted 5px #948979;
+}
+
+.post-controls > * {
+    color: black;
+    text-decoration: none;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 50px;
+}
+
+.info > * {
+    font-size: 20px;
+    margin: 5px 0px 5px 0px;
+}
+
+.post-title {
+    width: 100%;
+    height: auto;
+}
+
+.post-title > * {
+    word-wrap: break-word;
+    font-size: 24px;
+    margin: 5px 0px 5px 0px;
+}
+
+.post-text {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.post-text > * {
+    word-wrap: break-word;
+    font-size: 18px;
+    margin: 0px 0px 0px 0px;
 }
 
 .comic-relief-regular {

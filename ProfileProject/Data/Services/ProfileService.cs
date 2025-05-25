@@ -1,6 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Build.Exceptions;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using NuGet.ProjectModel;
 using ProfileProject.Models;
+using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ProfileProject.Data.Services
@@ -59,5 +66,36 @@ namespace ProfileProject.Data.Services
             }
             return null;
         }
+
+        public async Task<List<ProfileViewModel?>> GetWithOffset(int offset, int limit)
+        {
+            List<IdentityUser> users = _userManager.Users.Skip(offset).Take(30).ToList();
+            List<ProfileViewModel> profiles = new();
+            foreach(IdentityUser user in users)
+            {
+                var claims = await _userManager.GetClaimsAsync(user);
+                if(bool.Parse(claims.FirstOrDefault(c => c.Type == "ShowInSearch").Value) == true)
+                {
+                    profiles.Add(await FromIdentity(user));
+                }
+            }
+            return profiles;
+        }
+
+        public async Task<List<ProfileViewModel>> ListFromUsername(string username)
+        {
+            List<ProfileViewModel> profiles = new();
+            IdentityUser? user = await _userManager.FindByNameAsync(username);
+            if (user != null)
+            {
+                var claims = await _userManager.GetClaimsAsync(user);
+                if(bool.Parse(claims.FirstOrDefault(c => c.Type == "ShowInSearch").Value))
+                {
+                    profiles.Add(await FromIdentity(user));
+                }
+            }
+            return profiles;
+        }
+        
     }
 }

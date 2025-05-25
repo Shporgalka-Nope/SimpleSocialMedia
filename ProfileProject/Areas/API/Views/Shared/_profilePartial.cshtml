@@ -1,0 +1,12 @@
+﻿@model List<ProfileProject.Models.ProfileViewModel>;
+
+@foreach(var user in Model)
+{
+	<div class="profile-card">
+		<img class="pfp" src="@user.PFPath" />
+		<div>
+			<a class="username ubuntu-bold" asp-controller="profile" asp-action="@user.Username">@user.Username</a>
+			<p class="bio ubuntu-medium">@user.Bio</p>
+		</div>
+	</div>
+}

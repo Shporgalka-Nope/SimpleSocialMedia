@@ -1,0 +1,33 @@
+﻿@model ProfileProject.Models.PostViewModel;
+
+@section Styles {
+	<link href="~/css/PostsCreateStyle.css" rel="stylesheet" />
+}
+
+<div id="box">
+	<div id="create-head">
+		<h1 class="ubuntu-bold orange">Create new post</h1>
+		<p class="ubuntu-medium gray">Please refer to TOS for rules</p>
+	</div>
+	<div id="create">
+		<form method="post">
+			<label class="ubuntu-light" asp-for="Title"></label><br />
+			<input id="input-title" asp-for="Title" /><br />
+			<span class="ubuntu-light red" asp-validation-for="Title"></span><br /><br />
+			<label class="ubuntu-light" asp-for="Text"></label>
+			<textarea id="input-text" asp-for="Text"></textarea><br />
+			<span asp-validation-for="Text"></span><br /><br />
+			<div id="create-controls">
+				<h2 class="ubuntu-medium">Save changes</h2>
+				<div id="save">
+					<input type="submit" class="ubuntu-light" />
+
+					<div id="cancel">
+						<a class="ubuntu-light" asp-controller="profile" asp-action="@User.Identity.Name">Cancel</a>
+					</div>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+</div>

@@ -95,7 +95,8 @@ namespace ProfileProject.Areas.Profile.Controllers
         [HttpGet]
         [Route("edit/{username:required}")]
         [Authorize]
-        public async Task<IActionResult> Edit([FromRoute] string username, [FromServices] ProfileService profileService)
+        public async Task<IActionResult> Edit([FromRoute] string username, 
+            [FromServices] ProfileService profileService)
         {
             AuthorizationResult result = await _auth.ProveUserOwnership(User, username);
             if(result == null || !result.Succeeded) { return Forbid(); }
@@ -120,6 +121,19 @@ namespace ProfileProject.Areas.Profile.Controllers
             return RedirectToAction($"{User.Identity.Name}", "profile");
         }
 
+        [HttpGet]
+        [Route("search/")]
+        public IActionResult Search()
+        {
+            return View();
+        }
+        [HttpGet]
+        [Route("search/{username:required}")]
+        public IActionResult Search(string username)
+        {
+            return View();
+        }
+
         [Route("{username:required}")]
         public async Task<IActionResult> GetByUsername(string username, [FromServices] ProfileService profileService)
         {
@@ -127,7 +141,11 @@ namespace ProfileProject.Areas.Profile.Controllers
             if(profile != null) 
             {
                 AuthorizationResult result = await _auth.ProveUserOwnership(User, username);
-                if(result.Succeeded) { profile.IsAllowedToEdit = true; }
+                if(result.Succeeded) 
+                { 
+                    profile.IsAllowedToEdit = true;
+                    ViewData["isOwner"] = true;
+                }
                 return View(profile); 
             }
             return NotFound();
