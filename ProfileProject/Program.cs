@@ -15,6 +15,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
+    //These are turned off for DEMO purposes
     options.SignIn.RequireConfirmedAccount = false;
     options.Lockout.MaxFailedAccessAttempts = 8;
     options.Lockout.AllowedForNewUsers = true;
@@ -31,7 +32,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/profile/register/";
+    options.LoginPath = "/profile/signin/";
 });
 
 builder.Services.AddAuthorization(options =>
@@ -77,7 +78,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{username?}");
+    pattern: "{controller=Main}/{action}/{username?}");
 app.MapRazorPages();    
 
 app.Run();
