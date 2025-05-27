@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProfileProject.Data.Services;
+using ProfileProject.Data.Services.Interfaces;
 using ProfileProject.Models;
 
 namespace ProfileProject.Areas.Posts.Controllers
@@ -20,7 +21,7 @@ namespace ProfileProject.Areas.Posts.Controllers
         [HttpPost]
         [Authorize]
         [Route("create/")]
-        public async Task<IActionResult> Create([FromForm] PostViewModel input, [FromServices] PostService postService)
+        public async Task<IActionResult> Create([FromForm] PostViewModel input, [FromServices] IPostService postService)
         {
             if(ModelState.IsValid)
             {

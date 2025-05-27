@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Data\Services\Interfaces\" />
     <Folder Include="wwwroot\Media\" />
     <Folder Include="wwwroot\Profile\PFPs\Users\" />
   </ItemGroup>

@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client.AppConfig;
+using ProfileProject.Data.Services.Interfaces;
 using ProfileProject.Models;
 using System.Collections.Generic;
 
 namespace ProfileProject.Data.Services
 {
-    public class PostService
+    public class PostService : IPostService
     {
         private UserManager<IdentityUser> _userManager;
         private ApplicationDbContext _context;
