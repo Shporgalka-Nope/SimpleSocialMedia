@@ -8,7 +8,8 @@ using ProfileProject.Data.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
+    ?? @"Server=(localdb)\\mssqllocaldb;Database=ProfileProject_Local_DB;Trusted_Connection=True;MultipleActiveResultSets=true";
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
