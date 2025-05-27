@@ -28,7 +28,7 @@ public class PostsController_Tests
     }
 
     [Fact]
-    public async void Create_Post_NotNullIsRedirect()
+    public async void Create_Post_IsRedirect()
     {
         //Arrange
         GenericIdentity testIdentity = new GenericIdentity("TestIdentity");
@@ -50,7 +50,34 @@ public class PostsController_Tests
         IActionResult? result = await controller.Create(postModel, mockPostService.Object);
 
         //Assert
-        Assert.NotNull(result);
         Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("profile", ((RedirectToActionResult)result).ControllerName);
+        Assert.Equal($"{testIdentity.Name}", ((RedirectToActionResult)result).ActionName);
+    }
+
+    [Fact]
+    public async void Create_Post_InvalidModelState()
+    {
+        //Arrange
+        GenericIdentity testIdentity = new GenericIdentity("TestIdentity");
+        var testUser = new ClaimsPrincipal(testIdentity);
+        HttpContext testContext = new DefaultHttpContext() { User = testUser };
+        var testControllerContext = new ControllerContext() { HttpContext = testContext };
+
+        PostsController controller = new() { ControllerContext = testControllerContext };
+        controller.ModelState.AddModelError("Title", "Required");
+        PostViewModel postModel = new()
+        {
+            Text = "Text"
+        };
+        var mockPostService = new Mock<IPostService>();
+        mockPostService.Setup(s => s.CreateNew(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(Task.CompletedTask);
+
+        //Act
+        var result = await controller.Create(postModel, mockPostService.Object);
+
+        //Assert
+        Assert.IsType<ViewResult>(result);
     }
 }
