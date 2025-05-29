@@ -16,21 +16,21 @@ namespace ProfileProjectTests;
 
 public class BasicUserControl_Tests
 {
-    //[Fact]
+    
     //public async void Test_CanCreate()
     //{
     //    var moqStore = new Mock<IUserStore<IdentityUser>>();
     //    var moqUserManager = new Mock<UserManager<IdentityUser>>(moqStore.Object, null, null, null, null, null, null, null, null);
     //    moqUserManager.Setup(x => x.CreateAsync(It.IsAny<IdentityUser>(), It.IsAny<string>()))
     //        .ReturnsAsync(IdentityResult.Success);
-    //    moqUserManager.Setup(x => x.AddClaimsAsync(It.IsAny<IdentityUser>(), 
+    //    moqUserManager.Setup(x => x.AddClaimsAsync(It.IsAny<IdentityUser>(),
     //        It.IsAny<IEnumerable<System.Security.Claims.Claim>>()))
     //        .ReturnsAsync(IdentityResult.Success);
 
-    //    var moqSignInManager = new Mock<SignInManager<IdentityUser>>(moqUserManager.Object, 
-    //        new Mock<IHttpContextAccessor>().Object, 
+    //    var moqSignInManager = new Mock<SignInManager<IdentityUser>>(moqUserManager.Object,
+    //        new Mock<IHttpContextAccessor>().Object,
     //        new Mock<IUserClaimsPrincipalFactory<IdentityUser>>().Object,
-    //        new Mock<IOptions<IdentityOptions>>().Object, 
+    //        new Mock<IOptions<IdentityOptions>>().Object,
     //        new Mock<ILogger<SignInManager<IdentityUser>>>().Object,
     //        new Mock<IAuthenticationSchemeProvider>().Object,
     //        new Mock<IUserConfirmation<IdentityUser>>().Object);
@@ -41,8 +41,8 @@ public class BasicUserControl_Tests
     //    var moqIHosting = new Mock<IWebHostEnvironment>();
     //    moqIHosting.Setup(x => x.WebRootPath).Returns("test/");
 
-    //    var service = new BasicAuthControl(moqUserManager.Object, 
-    //        moqSignInManager.Object, 
+    //    var service = new BasicAuthControl(moqUserManager.Object,
+    //        moqSignInManager.Object,
     //        moqLogger);
 
     //    bool result = await service.AddNewUserWithCookies("123", "123", "123");

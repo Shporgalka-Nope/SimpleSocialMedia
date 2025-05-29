@@ -6,7 +6,7 @@ namespace ProfileProjectTests;
 public class MainController_Tests
 {
     [Fact]
-    public void Index_notNull()
+    public void Index_notNullIsView()
     {
         //Arrange
         MainController controller = new();
@@ -16,5 +16,6 @@ public class MainController_Tests
 
         //Assert
         Assert.NotNull(result);
+        Assert.IsType<ViewResult>(result);
     }
 }

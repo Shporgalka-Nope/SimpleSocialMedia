@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Build.Exceptions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using NuGet.ProjectModel;
+using ProfileProject.Data.Services.Interfaces;
 using ProfileProject.Models;
 using System.Collections;
 using System.Collections.Specialized;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ProfileProject.Data.Services
 {
-    public class ProfileService
+    public class ProfileService : IProfileService
     {
         private UserManager<IdentityUser> _userManager;
         public ProfileService(UserManager<IdentityUser> userManager)

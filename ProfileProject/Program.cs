@@ -46,9 +46,11 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IAuthControl, BasicAuthControl>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 //To delete, NOTE TO SELF: Do NOT request, USE interface instead
-builder.Services.AddScoped<BasicAuthControl>();
-builder.Services.AddScoped<ProfileService>();
+//builder.Services.AddScoped<BasicAuthControl>();
+//builder.Services.AddScoped<ProfileService>();
 
 builder.Services.AddScoped<IAuthorizationHandler, ProfileOwnerAuthorizationHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, PostOwnerAuthorizationHandler>();

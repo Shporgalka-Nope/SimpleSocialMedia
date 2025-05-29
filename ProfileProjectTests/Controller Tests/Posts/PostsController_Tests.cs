@@ -15,7 +15,7 @@ namespace ProfileProjectTests;
 public class PostsController_Tests
 {
     [Fact]
-    public void Create_Get_NotNull()
+    public void Create_Get_NotNullIsView()
     {
         //Arrange
         PostsController controller = new();
@@ -25,6 +25,7 @@ public class PostsController_Tests
 
         //Assert
         Assert.NotNull(result);
+        Assert.IsType<ViewResult>(result);
     }
 
     [Fact]

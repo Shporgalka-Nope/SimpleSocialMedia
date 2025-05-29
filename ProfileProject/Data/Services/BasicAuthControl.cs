@@ -5,25 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using ProfileProject.Data.Requirements;
+using ProfileProject.Data.Services.Interfaces;
 using ProfileProject.Models;
 using System.Drawing;
 using System.Security.Claims;
 
 namespace ProfileProject.Data.Services
 {
-    public class BasicAuthControl
+    public class BasicAuthControl : IAuthControl
     {
         private UserManager<IdentityUser> _userManager;
         private SignInManager<IdentityUser> _signInManager;
         private IConfiguration _config;
         private ProfileService _profileservice;
         private IAuthorizationService _authService;
-        private PostService _postService;
+        private IPostService _postService;
         public BasicAuthControl(
             [FromServices] UserManager<IdentityUser> userManager,
             [FromServices] SignInManager<IdentityUser> signInManager,
             [FromServices] ProfileService profileservice,
-            [FromServices] PostService postService,
+            [FromServices] IPostService postService,
             [FromServices] IConfiguration config,
             [FromServices] IAuthorizationService authService)
         {
@@ -144,9 +145,9 @@ namespace ProfileProject.Data.Services
             return null;
         }
 
-        public async Task<AuthorizationResult> ProveUserOwnership(ClaimsPrincipal loggedUser, string profileUsername)
+        public async Task<AuthorizationResult?> ProveUserOwnership(ClaimsPrincipal loggedUser, string profileUsername)
         {
-            var profileUser = await _userManager.FindByNameAsync(profileUsername);
+            IdentityUser? profileUser = await _userManager.FindByNameAsync(profileUsername);
             if(profileUser != null)
             {
                 var profile = await _profileservice.FromIdentity(profileUser);

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 using ProfileProject.Data;
 using ProfileProject.Data.Attributes;
 using ProfileProject.Data.Services;
+using ProfileProject.Data.Services.Interfaces;
 using ProfileProject.Models;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -15,8 +16,8 @@ namespace ProfileProject.Areas.Profile.Controllers
     [Route("profile/")]
     public class ProfileController : Controller
     {
-        private BasicAuthControl _auth;
-        public ProfileController(BasicAuthControl auth)
+        private IAuthControl _auth;
+        public ProfileController(IAuthControl auth)
         {
             _auth = auth;
         }
@@ -96,12 +97,12 @@ namespace ProfileProject.Areas.Profile.Controllers
         [Route("edit/{username:required}")]
         [Authorize]
         public async Task<IActionResult> Edit([FromRoute] string username, 
-            [FromServices] ProfileService profileService)
+            [FromServices] IProfileService profileService)  
         {
-            AuthorizationResult result = await _auth.ProveUserOwnership(User, username);
+            AuthorizationResult? result = await _auth.ProveUserOwnership(User, username);
             if(result == null || !result.Succeeded) { return Forbid(); }
             
-            ProfileViewModel profileVM = await profileService.GetByUsername(username);
+            ProfileViewModel? profileVM = await profileService.GetByUsername(username);
             EditViewModel editVM = await profileService.EditViewModelFromProfile(profileVM);
             editVM.IsAllowedToEdit = true;
             return View(editVM);
@@ -127,21 +128,23 @@ namespace ProfileProject.Areas.Profile.Controllers
         {
             return View();
         }
-        [HttpGet]
-        [Route("search/{username:required}")]
-        public IActionResult Search(string username)
-        {
-            return View();
-        }
+
+        //Not sure if this method is even used, make intergration test and delete if not needed
+        //[HttpGet]
+        //[Route("search/{username:required}")]
+        //public IActionResult Search(string username)
+        //{
+        //    return View();
+        //}
 
         [Route("{username:required}")]
-        public async Task<IActionResult> GetByUsername(string username, [FromServices] ProfileService profileService)
+        public async Task<IActionResult> GetByUsername(string username, [FromServices] IProfileService profileService)
         {
             ProfileViewModel? profile = await profileService.GetByUsername(username);
             if(profile != null) 
             {
-                AuthorizationResult result = await _auth.ProveUserOwnership(User, username);
-                if(result.Succeeded) 
+                AuthorizationResult? result = await _auth.ProveUserOwnership(User, username);
+                if(result != null && result.Succeeded) 
                 { 
                     profile.IsAllowedToEdit = true;
                     ViewData["isOwner"] = true;
