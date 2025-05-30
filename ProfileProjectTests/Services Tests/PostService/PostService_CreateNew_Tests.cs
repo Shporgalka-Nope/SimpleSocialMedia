@@ -26,7 +26,7 @@ public class PostService_CreateNew_Tests
 
         using(var context = new ApplicationDbContext(options))
         {
-            //EnsureCreated() גûחûגאוע
+            //EnsureCreated() raises
             //Microsoft.Data.Sqlite.SqliteException : SQLite Error 1: 'near "max": syntax error'.
             context.Database.EnsureCreated();
             context.Users.Add(
