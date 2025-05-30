@@ -29,7 +29,7 @@ namespace ProfileProject.Data.Services
                 Author = user
             };
 
-            await _context.Posts.AddAsync(newPost);
+            await _context.Posts.AddAsync(newPost); 
             await _context.SaveChangesAsync();
         }
 
