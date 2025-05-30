@@ -12,8 +12,8 @@ namespace ProfileProject.Data.Services
     public class PostService : IPostService
     {
         private UserManager<IdentityUser> _userManager;
-        private ApplicationDbContext _context;
-        public PostService(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        private IDAL _context;
+        public PostService(UserManager<IdentityUser> userManager, IDAL context)
         {
             _userManager = userManager;
             _context = context;
@@ -21,7 +21,10 @@ namespace ProfileProject.Data.Services
 
         public async Task CreateNew(string title, string? text, string username)
         {
-            IdentityUser user = await _userManager.FindByNameAsync(username);
+            IdentityUser? user = await _userManager.FindByNameAsync(username);
+            if(user == null || string.IsNullOrWhiteSpace(title)) { throw new NullReferenceException(); }
+
+            if(string.IsNullOrWhiteSpace(text)) { text = null; }
             PostModel newPost = new()
             {
                 Title = title,
@@ -29,32 +32,31 @@ namespace ProfileProject.Data.Services
                 Author = user
             };
 
-            await _context.Posts.AddAsync(newPost); 
+            await _context.AddPostAsync(newPost); 
             await _context.SaveChangesAsync();
         }
 
         public PostModel? GetById(string id)
         {
-
-            var post = _context.Posts.Include(p => p.Author).FirstOrDefault(p => p.Id == Guid.Parse(id));
-            return post;
+            return _context.GetPostById(id);
         }
 
-        public async Task<List<PostModel>> GetWithOffset(string username, int offset, int limit)
+        public async Task<List<PostModel?>> GetWithOffset(string username, int offset, int limit)
         {
-            IdentityUser user = await _userManager.FindByNameAsync(username);
-            List<PostModel> posts = new();
+            if(offset < 0 || limit < 0) { throw new IndexOutOfRangeException(); }
+
+            IdentityUser? user = await _userManager.FindByNameAsync(username);
+            List<PostModel?> posts = new();
             if (user != null)
             {
-                posts = _context.Posts.Where(p => p.Author == user).OrderByDescending(p => p.CreationDateTime)
-                    .Skip(offset).Take(limit).ToList();
+                posts = _context.GetPostsByIdentity(user, offset, limit);
             }
             return posts;
         }
 
         public async Task DeletePost(string id)
         {
-            _context.Posts.Remove(_context.Posts.FirstOrDefault(p => p.Id == Guid.Parse(id)));
+            _context.DeletePostById(id);
             await _context.SaveChangesAsync();
         }
     }

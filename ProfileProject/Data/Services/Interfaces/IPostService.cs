@@ -8,7 +8,7 @@ namespace ProfileProject.Data.Services.Interfaces
 
         PostModel? GetById(string id);
 
-        Task<List<PostModel>> GetWithOffset(string username, int offset, int limit);
+        Task<List<PostModel?>> GetWithOffset(string username, int offset, int limit);
 
         Task DeletePost(string id);
     }
