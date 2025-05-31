@@ -11,10 +11,11 @@ namespace ProfileProject.Areas.Main.Controllers
             return View();
         }
 
-        [Route("forbidden/")]
-        public IActionResult Forbidden()
-        {
-            return View();
-        }
+        //TO-DO
+        //[Route("forbidden/")]
+        //public IActionResult Forbidden()
+        //{
+        //    return View();
+        //}
     }
 }

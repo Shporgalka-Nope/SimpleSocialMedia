@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProfileProject.Data;
 using ProfileProject.Data.Requirements;
 using ProfileProject.Data.Services;
+using ProfileProject.Data.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,9 +45,14 @@ builder.Services.AddAuthorization(options =>
     polity.Requirements.Add(new PostOwnerRequirement()));
 });
 
-builder.Services.AddScoped<BasicAuthControl>();
-builder.Services.AddScoped<ProfileService>();
-builder.Services.AddScoped<PostService>();
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IAuthControl, BasicAuthControl>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IDAL, DAL>();
+builder.Services.AddScoped<IImageProcessor, ImageProcessor>();
+//To delete, NOTE TO SELF: Do NOT request, USE interface instead
+//builder.Services.AddScoped<BasicAuthControl>();
+//builder.Services.AddScoped<ProfileService>();
 
 builder.Services.AddScoped<IAuthorizationHandler, ProfileOwnerAuthorizationHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, PostOwnerAuthorizationHandler>();

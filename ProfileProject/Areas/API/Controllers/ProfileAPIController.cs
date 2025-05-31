@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.FlowAnalysis;
 using NuGet.Protocol.Core.Types;
 using ProfileProject.Data;
 using ProfileProject.Data.Services;
+using ProfileProject.Data.Services.Interfaces;
 using ProfileProject.Models;
 
 namespace ProfileProject.Areas.API.Controllers
@@ -19,7 +20,7 @@ namespace ProfileProject.Areas.API.Controllers
     {
         [Route("getprofiles/{username?}")]
         public async Task<IActionResult> Index([FromRoute] string username, [FromQuery] int offset, 
-            [FromQuery] int limit, [FromServices] ProfileService profileService)
+            [FromQuery] int limit, [FromServices] IProfileService profileService)
         {
             if(!string.IsNullOrWhiteSpace(username))
             {
@@ -33,14 +34,14 @@ namespace ProfileProject.Areas.API.Controllers
 
         [Route("getposts/{username:required}")]
         public async Task<IActionResult> GetPosts([FromRoute] string username, [FromQuery] int offset,
-            [FromQuery] int limit, [FromServices] PostService postService)
+            [FromQuery] int limit, [FromServices] IPostService postService)
         {
             return PartialView("_postPartial", await postService.GetWithOffset(username, offset, limit));
         }
 
         [Route("deletepost")]
-        public async Task<IActionResult> DeletePost([FromQuery] string postid, [FromServices] PostService postService,
-            [FromServices] BasicAuthControl authControl)
+        public async Task<IActionResult> DeletePost([FromQuery] string postid, [FromServices] IPostService postService,
+            [FromServices] IAuthControl authControl)
         {
             AuthorizationResult result = await authControl.ProvePostOwnership(User, postid);
             if(result == null || !result.Succeeded) { return Forbid(); }
