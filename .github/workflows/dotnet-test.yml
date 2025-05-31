@@ -39,4 +39,4 @@ jobs:
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
       with:
-        file: 
+        file: find . -type f -name "coverage.cobertura.xml"
