@@ -28,34 +28,6 @@ jobs:
     - name: Test
       run: dotnet test -c Release --no-build --verbosity normal
 
-    - name: Test with coverage
-      run: |
-        dotnet test \
-          --configuration Release \
-          --no-build \
-          --collect:"XPlat Code Coverage" \
-          --settings coverlet.runsettings \
-          --logger trx
-
-    - name: Generate Coverage Report
-      uses: danielpalme/ReportGenerator-GitHub-Action@5.1.25
-      with:
-        reports: '**/coverage.cobertura.xml'
-        targetdir: 'coveragereport'
-        reporttypes: 'Badges;HtmlInline_AzurePipelines;Cobertura'
-
-    - name: Upload Coverage Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-report
-        path: coveragereport
-
-    - name: Upload to Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./**/coverage.info
-
     - name: Publish
       run: dotnet publish -c Release -o ./Publish --no-build
 
