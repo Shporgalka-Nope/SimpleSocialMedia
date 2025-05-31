@@ -23,7 +23,16 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build -c Debug --no-restore
+      run: dotnet build -c Release --no-restore
 
     - name: Test
-      run: dotnet test -c Debug --no-build --verbosity normal
+      run: dotnet test -c Release --no-build --verbosity normal
+
+    - name: Publish
+      run: dotnet publish -c Release -o ./Publish --no-build
+
+    - name: Save artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-data
+        path: ./Publish
