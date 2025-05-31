@@ -42,7 +42,8 @@ jobs:
         dotnet test -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/coverage.xml
 
     - name: list files
-      run: ls -la ./TestResults/
+      run: ls
+      
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
