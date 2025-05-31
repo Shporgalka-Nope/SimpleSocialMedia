@@ -43,7 +43,7 @@ jobs:
         mkdir -p ./TestResults
         ls
         dotnet test -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/coverage.xml
-        cd /TestResults
+        cd TestResults
         ls
 
     - name: Coveralls GitHub Action
