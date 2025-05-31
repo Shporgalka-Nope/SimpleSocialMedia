@@ -32,7 +32,7 @@ jobs:
       run: dotnet publish -c Release -o ./Publish --no-build
 
     - name: Save artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: release-data
-        path: ./Publish
+        path: ./Publish/**
