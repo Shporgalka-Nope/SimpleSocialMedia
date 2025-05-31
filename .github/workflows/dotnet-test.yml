@@ -34,9 +34,9 @@ jobs:
     - name: Get coverage report
       run: | 
         dotnet test --collect:"XPlat Code Coverage;Format=cobertura" 
-        find /TestResults -type f -name "*.xml"
+        find ./TestResults -type f -name "*.xml"
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
       with:
-        file: find /TestResults -type f -name "*.xml"
+        file: find ./TestResults -type f -name "*.xml"
