@@ -37,8 +37,8 @@ jobs:
         name: release-data
         path: ./Publish/
 
-    - name: Run tests with coverage
-      run: dotnet test --settings tests.runsettings --no-build
+    - name: Collect coverage
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/coverage.xml
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
