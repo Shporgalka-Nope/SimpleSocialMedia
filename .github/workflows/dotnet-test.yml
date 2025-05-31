@@ -34,8 +34,7 @@ jobs:
     - name: Get coverage report
       run: | 
         dotnet test --collect:"XPlat Code Coverage;Format=cobertura"
-        cd ProfileProjectTests
-        ls
+        find . -type f -name "coverage.opencover.xml"
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
