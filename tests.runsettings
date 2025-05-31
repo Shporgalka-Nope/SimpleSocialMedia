@@ -4,9 +4,7 @@
     <DataCollectors>
       <DataCollector friendlyName="XPlat code coverage">
         <Configuration>
-          <Format>cobertura</Format>
-          <Include>SimpleSocialMedia*</Include>
-          <ExcludeByFile>**/Migrations/*.cs,**/Program.cs,**/Startup.cs</ExcludeByFile>
+          <Format>cobertura,opencover</Format>
         </Configuration>
       </DataCollector>
     </DataCollectors>

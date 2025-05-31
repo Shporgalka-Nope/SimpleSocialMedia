@@ -38,8 +38,7 @@ jobs:
         path: ./Publish/
 
     - name: Run tests with coverage
-      run: |
-        dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings
+      run: dotnet test --settings tests.runsettings --no-build
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
