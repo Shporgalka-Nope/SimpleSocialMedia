@@ -38,7 +38,11 @@ jobs:
         path: ./Publish/
 
     - name: Collect coverage
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/coverage.xml
+      run: | 
+        dotnet test -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/coverage.xml
+
+    - name: list files
+      run: ls -la ./TestResults/
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
