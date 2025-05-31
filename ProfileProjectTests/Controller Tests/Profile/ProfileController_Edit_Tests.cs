@@ -26,7 +26,7 @@ public class ProfileController_Edit_Tests
         mockIProfileService.Setup(m => m.GetByUsername(It.IsAny<string>()))
             .ReturnsAsync(model);
         mockIProfileService.Setup(m => m.EditViewModelFromProfile(It.IsAny<ProfileViewModel>()))
-            .ReturnsAsync(editModel);
+            .Returns(editModel);
 
         GenericIdentity testIdentity = new GenericIdentity("TestIdentity");
         var testUser = new ClaimsPrincipal(testIdentity);

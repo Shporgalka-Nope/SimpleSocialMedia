@@ -103,7 +103,7 @@ namespace ProfileProject.Areas.Profile.Controllers
             if(result == null || !result.Succeeded) { return Forbid(); }
             
             ProfileViewModel? profileVM = await profileService.GetByUsername(username);
-            EditViewModel editVM = await profileService.EditViewModelFromProfile(profileVM);
+            EditViewModel editVM = profileService.EditViewModelFromProfile(profileVM);
             editVM.IsAllowedToEdit = true;
             return View(editVM);
         }

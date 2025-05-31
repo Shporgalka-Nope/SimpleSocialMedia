@@ -1,12 +1,15 @@
-﻿using ProfileProject.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using ProfileProject.Models;
 
 namespace ProfileProject.Data.Services.Interfaces
 {
     public interface IProfileService
     {
+        Task<ProfileViewModel> FromIdentity(IdentityUser identity);
+
         Task<ProfileViewModel?> GetByUsername(string username);
         
-        Task<EditViewModel> EditViewModelFromProfile(ProfileViewModel profileVM);
+        EditViewModel EditViewModelFromProfile(ProfileViewModel profileVM);
 
         Task<List<ProfileViewModel?>> GetWithOffset(int offset, int limit);
 

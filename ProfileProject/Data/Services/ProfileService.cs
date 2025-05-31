@@ -28,24 +28,27 @@ namespace ProfileProject.Data.Services
             {
                 //For claim titles refer to BasicAuthControl.AddNewUserWithCookies()
                 Username = identity.UserName,
-                Age = int.Parse(claims.FirstOrDefault(x => x.Type == "Age").Value 
+
+                Age = int.Parse(claims.FirstOrDefault(x => x.Type == "Age")?.Value 
                     ?? "1"),
-                CreationDate = DateOnly.FromDateTime(
-                    DateTime.Parse(claims.FirstOrDefault(x => x.Type == "CreationDate").Value 
-                    ?? $"{ DateTime.Now }")),
-                Bio = claims.FirstOrDefault(x => x.Type == "Bio").Value 
+                Bio = claims.FirstOrDefault(x => x.Type == "Bio")?.Value 
                     ?? "Thats my bio!",
-                PFPath = claims.FirstOrDefault(x => x.Type == "PFPath").Value 
+                PFPath = claims.FirstOrDefault(x => x.Type == "PFPath")?.Value 
                     ?? Path.Combine("PFPs", "placeholder.png"),
-                ShowAge = bool.Parse(claims.FirstOrDefault(x => x.Type == "ShowAge").Value 
+
+                CreationDate = DateOnly.FromDateTime(
+                    DateTime.Parse(claims.FirstOrDefault(x => x.Type == "CreationDate")?.Value 
+                    ?? $"{ DateTime.UtcNow }")),
+
+                ShowAge = bool.Parse(claims.FirstOrDefault(x => x.Type == "ShowAge")?.Value 
                     ?? "true"),
-                ShowInSearch = bool.Parse(claims.FirstOrDefault(x => x.Type == "ShowInSearch").Value 
+                ShowInSearch = bool.Parse(claims.FirstOrDefault(x => x.Type == "ShowInSearch")?.Value 
                     ?? "true")
             };
             return profile;
         }
 
-        public async Task<EditViewModel> EditViewModelFromProfile(ProfileViewModel profileVM)
+        public EditViewModel EditViewModelFromProfile(ProfileViewModel profileVM)
         {
             EditViewModel editVM = new()
             {
@@ -59,7 +62,7 @@ namespace ProfileProject.Data.Services
 
         public async Task<ProfileViewModel?> GetByUsername(string username)
         {
-            IdentityUser selectedUser = await _userManager.FindByNameAsync(username);
+            IdentityUser? selectedUser = await _userManager.FindByNameAsync(username);
             if(selectedUser != null)
             {
                 ProfileViewModel profile = await FromIdentity(selectedUser);
@@ -75,7 +78,7 @@ namespace ProfileProject.Data.Services
             foreach(IdentityUser user in users)
             {
                 var claims = await _userManager.GetClaimsAsync(user);
-                if(bool.Parse(claims.FirstOrDefault(c => c.Type == "ShowInSearch").Value) == true)
+                if(bool.Parse(claims.FirstOrDefault(c => c.Type == "ShowInSearch")?.Value ?? "true") == true)
                 {
                     profiles.Add(await FromIdentity(user));
                 }
@@ -90,7 +93,7 @@ namespace ProfileProject.Data.Services
             if (user != null)
             {
                 var claims = await _userManager.GetClaimsAsync(user);
-                if(bool.Parse(claims.FirstOrDefault(c => c.Type == "ShowInSearch").Value))
+                if(bool.Parse(claims.FirstOrDefault(c => c.Type == "ShowInSearch")?.Value ?? "true"))
                 {
                     profiles.Add(await FromIdentity(user));
                 }

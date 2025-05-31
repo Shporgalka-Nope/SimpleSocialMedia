@@ -16,21 +16,21 @@ namespace ProfileProject.Data.Services
     {
         private UserManager<IdentityUser> _userManager;
         private SignInManager<IdentityUser> _signInManager;
-        private IConfiguration _config;
-        private ProfileService _profileservice;
+        private IImageProcessor _imageProcessor;
+        private IProfileService _profileservice;
         private IAuthorizationService _authService;
         private IPostService _postService;
         public BasicAuthControl(
             [FromServices] UserManager<IdentityUser> userManager,
             [FromServices] SignInManager<IdentityUser> signInManager,
-            [FromServices] ProfileService profileservice,
+            [FromServices] IProfileService profileservice,
             [FromServices] IPostService postService,
-            [FromServices] IConfiguration config,
+            [FromServices] IImageProcessor imageProcessor,
             [FromServices] IAuthorizationService authService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _config = config;
+            _imageProcessor = imageProcessor;
             _profileservice = profileservice;
             _authService = authService;
             _postService = postService;
@@ -58,11 +58,8 @@ namespace ProfileProject.Data.Services
                     new Claim("ShowInSearch", "true")
                 };
                 var resultClaims = await _userManager.AddClaimsAsync(newUser, claims);
-                if(resultClaims.Succeeded) 
-                { 
-                    await _signInManager.SignInAsync(newUser, false);
-                    return true;
-                }
+                await _signInManager.SignInAsync(newUser, false);
+                return true;
             }
             return false;
         }
@@ -70,9 +67,11 @@ namespace ProfileProject.Data.Services
         public async Task AddAdditionalInfo(string? bio = null, int? age = null, IFormFile? pfp = null, 
             bool? showAge = null, bool? showInSearch = null)
         {
-            string? username = _signInManager.Context.User.Identity.Name;
+            string? username = _signInManager.Context.User.Identity?.Name;
+            if(username == null) { throw new NullReferenceException(); }
             IdentityUser user = await _userManager.FindByNameAsync(username);
             var claims = await _userManager.GetClaimsAsync(user);
+
             if (!string.IsNullOrWhiteSpace(bio))
             {
                 Claim oldClaim = claims.FirstOrDefault(c => c.Type == "Bio");
@@ -87,34 +86,6 @@ namespace ProfileProject.Data.Services
                 await _userManager.ReplaceClaimAsync(user, oldClaim, newClaim);
             }
 
-            if(pfp != null && pfp.Length != 0)
-            {
-                if(pfp.Length <= int.Parse(_config.GetSection("Profile")["PFPMaxSize"]) * 1024 * 1024)
-                {
-                    var extentions = new[] { ".png", "jpeg", ".jpg" };
-                    var extention = Path.GetExtension(pfp.FileName).ToLowerInvariant();
-                    if(!string.IsNullOrEmpty(extention) || extentions.Contains(extention))
-                    {
-                        using (var image = Image.FromStream(pfp.OpenReadStream())) 
-                        {
-                            if(image.Width != image.Height) { return; }
-                        }
-
-                        var fileName = $"{Guid.NewGuid()}{extention}";
-                        var uploadFolder = Path.Combine("PFPs", "Users", fileName);
-
-                        using (FileStream stream = new(Path.Combine("wwwroot", "Profile", uploadFolder), FileMode.Create))
-                        {
-                            await pfp.CopyToAsync(stream);
-                        }
-
-                        Claim oldClaim = claims.FirstOrDefault(c => c.Type == "PFPath");
-                        Claim newClaim = new Claim("PFPath", $"{uploadFolder}");
-                        await _userManager.ReplaceClaimAsync(user, oldClaim, newClaim);
-                    }
-                }
-            }
-
             if(showAge != null)
             {
                 Claim oldClaim = claims.FirstOrDefault(c => c.Type == "ShowAge");
@@ -127,6 +98,18 @@ namespace ProfileProject.Data.Services
                 Claim oldClaim = claims.FirstOrDefault(c => c.Type == "ShowInSearch");
                 Claim newClaim = new Claim("ShowInSearch", $"{showInSearch}");
                 await _userManager.ReplaceClaimAsync(user, oldClaim, newClaim);
+            }
+
+            if(pfp != null && pfp.Length != 0)
+            {
+                bool result = _imageProcessor.ValidateImage(pfp);
+                if(result)
+                {
+                    string? uploadFolder = await _imageProcessor.SaveImage(pfp);
+                    Claim oldClaim = claims.FirstOrDefault(c => c.Type == "PFPath");
+                    Claim newClaim = new Claim("PFPath", $"{uploadFolder}");
+                    await _userManager.ReplaceClaimAsync(user, oldClaim, newClaim);
+                }
             }
         }
 
