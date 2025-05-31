@@ -26,7 +26,12 @@ jobs:
       run: dotnet build -c Release --no-restore
 
     - name: Test
-      run: dotnet test -c Release --no-build --verbosity normal
+      run: dotnet test -c Release --no-build --verbosity normal --collect:"XPat Code Coverage" --results-directory TestResults
+
+    - name: Generate report
+      run: |
+        dotnet tool install -g dotnet-reportgenerator-globaltool
+        reportgenerator -reports:TestResults/**/coverage.cobertura.xml -targetdir:CoverageReport -reporttypes:Badges
 
     - name: Publish
       run: dotnet publish -c Release -o ./Publish --no-build
