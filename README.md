@@ -1,4 +1,7 @@
 # Connection Point - Платформа для микроблогинга
+[![Coverage Status](https://coveralls.io/repos/github/Shporgalka-Nope/SimpleSocialMedia/badge.svg?branch=master)](https://coveralls.io/github/Shporgalka-Nope/SimpleSocialMedia?branch=master)
+
+
 Backend - ASP.Net Core (MVC), Identity Core, EF Core
 Frontend - Razor представления, HTML, CSS, JavaScript
 

@@ -35,4 +35,11 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: release-data
-        path: ./Publish/**
+        path: ./Publish/
+
+    - name: Run tests with coverage
+      run: |
+        dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings
+
+    - name: Upload to Codecov
+      uses: codecov/codecov-action@v3
