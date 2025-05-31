@@ -32,8 +32,9 @@ jobs:
       run: dotnet publish -c Release -o ./Publish --no-build
 
     - name: Get coverage report
-      run: dotnet test --collect:"XPlat Code Coverage;Format=cobertura"
-      run: find ./TestResults -name "coverage.opencover.xml"
+      run: | 
+        dotnet test --collect:"XPlat Code Coverage;Format=cobertura" 
+        find ./TestResults -name "coverage.opencover.xml"
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
