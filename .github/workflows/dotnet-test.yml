@@ -31,6 +31,13 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -o ./Publish --no-build
 
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: Release build
+        path: ./Publish
+        if-no-files-found: error
+
     - name: Get coverage report
       run: | 
         dotnet test --collect:"XPlat Code Coverage;Format=cobertura"
