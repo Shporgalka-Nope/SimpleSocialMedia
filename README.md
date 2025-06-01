@@ -3,6 +3,8 @@
 [![Main branch tests](https://github.com/Shporgalka-Nope/SimpleSocialMedia/actions/workflows/dotnet-test.yml/badge.svg)](https://github.com/Shporgalka-Nope/SimpleSocialMedia/actions/workflows/dotnet-test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/Shporgalka-Nope/SimpleSocialMedia/badge.svg?branch=master)](https://coveralls.io/github/Shporgalka-Nope/SimpleSocialMedia?branch=master)
 
+[![GitHub Release](https://img.shields.io/github/v/release/Shporgalka-Nope/SimpleSocialMedia?sort=date&display_name=release&style=flat&label=Download%20latest%20release)](https://github.com/Shporgalka-Nope/SimpleSocialMedia/releases/download/Release/Release.build.zip)
+
 Backend - ASP.Net Core (MVC), Identity Core, EF Core
 
 Frontend - Razor представления, HTML, CSS, JavaScript
