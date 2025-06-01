@@ -33,7 +33,7 @@ jobs:
 
     - name: Get coverage report
       run: | 
-        dotnet test --collect:"XPlat Code Coverage;Format=cobertura"
+        dotnet test --collect:"XPlat Code Coverage;Format=cobertura;verbosity=detailed"
         find . -type f -name "coverage.cobertura.xml" -exec mv {} ./ProfileProjectTests/TestResults/ \;
 
     - name: Coveralls GitHub Action
