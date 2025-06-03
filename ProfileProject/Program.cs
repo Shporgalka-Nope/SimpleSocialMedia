@@ -86,6 +86,12 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Main}/{action}/{username?}");
-app.MapRazorPages();    
+app.MapRazorPages();
+
+using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
+}
 
 app.Run();
