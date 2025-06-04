@@ -1,9 +1,20 @@
 ﻿@model List<ProfileProject.Models.ProfileViewModel>;
+@inject IWebHostEnvironment env;
+@{
+	string placeholder = System.IO.Path.Combine("PFPs", "placeholder.png");
+}
 
 @foreach(var user in Model)
 {
 	<div class="profile-card">
-		<img class="pfp" src="@user.PFPath" />
+		@if (System.IO.Path.Exists(System.IO.Path.Combine(env.WebRootPath, "Profile", user.PFPath)))
+		{
+			<img class="pfp" src="@user.PFPath" />
+		}
+		else
+		{
+			<img class="pfp" src="@placeholder" />
+		}
 		<div>
 			<a class="username ubuntu-bold" asp-controller="profile" asp-action="@user.Username">@user.Username</a>
 			<p class="bio ubuntu-medium">@user.Bio</p>

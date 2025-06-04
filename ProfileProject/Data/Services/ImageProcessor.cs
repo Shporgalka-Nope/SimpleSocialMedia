@@ -43,7 +43,8 @@ namespace ProfileProject.Data.Services
             var fileName = $"{Guid.NewGuid()}{extention}";
             var uploadFolder = Path.Combine("PFPs", "Users", fileName);
 
-            var dir = Directory.GetCurrentDirectory();
+            var storageDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Profile", "PFPs", "Users");
+            if(!Path.Exists(storageDir)) { Directory.CreateDirectory(storageDir); }
 
             using (FileStream stream = new(Path.Combine("wwwroot", "Profile", uploadFolder), FileMode.Create))
             {
