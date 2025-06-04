@@ -40,8 +40,11 @@ jobs:
 
     - name: Get coverage report
       run: | 
-        dotnet test --collect:"XPlat Code Coverage;Format=cobertura"
-        find . -type f -name "coverage.cobertura.xml" -exec mv {} ./ProfileProjectTests/TestResults/ \;
+        dotnet test ProfileProjectTests/ProfileProjectTests.csproj 
+        /p:CollectCoverage=true 
+        /p:CoverletOutputFormat=cobertura 
+        /p:CoverletOutput=./TestResults/ 
+        /p:ExcludeByFile=\"**/Models/**/*.cs%2c**/Data/Migrations/**/*.cs%2c**/Data/Attributes/**/*.cs%2c**/*.cshtml%2c**/*.cshtml%2c**/*.cshtml%2c**/*.cshtml\"
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
