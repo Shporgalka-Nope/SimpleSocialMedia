@@ -3,8 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-/ProfileProject/wwwroot/Profile/PFPs/Users/
-
+ProfileProject/wwwroot/Profile/PFPs/Users/*
+!ProfileProject/wwwroot/Profile/PFPs/Users/*.gitkeep
 
 # User-specific files
 *.rsuser

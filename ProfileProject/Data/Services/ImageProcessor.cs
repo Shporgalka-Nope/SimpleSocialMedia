@@ -43,6 +43,8 @@ namespace ProfileProject.Data.Services
             var fileName = $"{Guid.NewGuid()}{extention}";
             var uploadFolder = Path.Combine("PFPs", "Users", fileName);
 
+            var dir = Directory.GetCurrentDirectory();
+
             using (FileStream stream = new(Path.Combine("wwwroot", "Profile", uploadFolder), FileMode.Create))
             {
                 await image.CopyToAsync(stream);
