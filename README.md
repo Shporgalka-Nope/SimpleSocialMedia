@@ -1,7 +1,7 @@
 # Connection Point - Платформа для микроблогинга
 ![ASP.NET Core](https://img.shields.io/badge/-ASP.NET_Core-512BD4?logo=dotnet) 
 [![Main branch tests](https://github.com/Shporgalka-Nope/SimpleSocialMedia/actions/workflows/dotnet-test.yml/badge.svg)](https://github.com/Shporgalka-Nope/SimpleSocialMedia/actions/workflows/dotnet-test.yml)
-[![Coverage Status](https://coveralls.io/repos/github/Shporgalka-Nope/SimpleSocialMedia/badge.svg?branch=master)](https://coveralls.io/github/Shporgalka-Nope/SimpleSocialMedia?branch=master&cache_kill=1)
+[![Coverage Status](https://coveralls.io/repos/github/Shporgalka-Nope/SimpleSocialMedia/badge.svg)](https://coveralls.io/github/Shporgalka-Nope/SimpleSocialMedia)
 
 [![GitHub Release](https://img.shields.io/github/v/release/Shporgalka-Nope/SimpleSocialMedia?sort=date&display_name=release&style=flat&label=Download%20latest%20release)](https://github.com/Shporgalka-Nope/SimpleSocialMedia/releases/download/Release/Release.build.zip)
 
