@@ -31,5 +31,5 @@ Long-term:
       Now listening on: http://localhost:5249``` (В данном случае ```http://localhost:5249```)
 
 ## Известные проблемы
-  1. Ошибка подключения к базе данных при запуске сервера (Issue #2) - При попытке запустить сервер, будет выдано исключение "error - 50", разбор проблемы уже был освещён в Issue #2, краткое решение:
+  1. Ошибка подключения к базе данных при запуске сервера ([Issue #2](https://github.com/Shporgalka-Nope/SimpleSocialMedia/issues/2)) - При попытке запустить сервер, будет выдано исключение "error - 50", разбор проблемы уже был освещён в Issue #2, краткое решение:
      Прописать команды `sqllocaldb stop mssqllocaldb`, `sqllocaldb delete mssqllocaldb` и `sqllocaldb create mssqllocaldb` в консоль и попробовать снова, сервер должен будет запуститься.
