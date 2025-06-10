@@ -29,3 +29,7 @@ Long-term:
   2. Распаковать архив
   3. Из папки проекта прописать в консоль следующую команду: ```dotnet ProfileProject.dll``` и перейти по адресу указанному в строке ```info: Microsoft.Hosting.Lifetime[14]
       Now listening on: http://localhost:5249``` (В данном случае ```http://localhost:5249```)
+
+## Известные проблемы
+  1. Ошибка подключения к базе данных при запуске сервера (Issue #2) - При попытке запустить сервер, будет выдано исключение "error - 50", разбор проблемы уже был освещён в Issue #2, краткое решение:
+     Прописать команды `sqllocaldb stop mssqllocaldb`, `sqllocaldb delete mssqllocaldb` и `sqllocaldb create mssqllocaldb` в консоль и попробовать снова, сервер должен будет запуститься.
