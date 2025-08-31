@@ -23,11 +23,11 @@ I will also change my approach to development of new features and transition.
 From now on, changes will be made in their own branches and merged into master after (self) code review and all tests passing.
 Feature development also changes - backend should be developed in TDD'ish way, meaning writing tests before the actual code.
 ### Migration status
-- [] Registration and login
-- [] Profile customization (Bio, profile picture)
-- [] Creating and deleting posts
-- [] Settings (Profile visibility, changing profile picture and bio)
-- [] Search for other users, taking their visibility settings into account
+- [ ] Registration and login
+- [ ] Profile customization (Bio, profile picture)
+- [ ] Creating and deleting posts
+- [ ] Settings (Profile visibility, changing profile picture and bio)
+- [ ] Search for other users, taking their visibility settings into account
 ## Functionality
 The following features are currently implemented:
   - Registration and login
